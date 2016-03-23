@@ -188,18 +188,12 @@ var addMotorcycle = function () {
     var lastIndex = allVehicles.length - 1;
     allVehicles[lastIndex].id = lastIndex;
     allVehicles[lastIndex].insert();
-    $('#' + lastIndex).click(function () {
-        allVehicles[this.id].move();
-    });
 };
 var addTank = function () {
     allVehicles.push(new Tank());
     var lastIndex = allVehicles.length - 1;
     allVehicles[allVehicles.length - 1].id = lastIndex;
     allVehicles[allVehicles.length - 1].insert();
-    $('#' + lastIndex).click(function () {
-        allVehicles[this.id].move();
-    });
 };
 function randomNum() {
     return Math.floor((Math.random() * 150)) + 50;
