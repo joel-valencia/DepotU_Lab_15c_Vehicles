@@ -53,6 +53,7 @@ var Car = (function (_super) {
         this.directions = ["W", "E"];
         this.degrees = [0, 180];
         this.animate = [{ left: "-=400" }, { left: "+=400" }];
+        this.type = "car";
     }
     Car.prototype.reverse = function () {
         var duration = 2000 / this.speed;
@@ -99,6 +100,7 @@ var CopCar = (function (_super) {
         this.degrees = [90, -90];
         this.animate = [{ top: "-=400" }, { top: "+=400" }];
         this.sirenOn = false;
+        this.type = "copCar";
     }
     CopCar.prototype.siren = function () {
         if (this.sirenOn == false) {
@@ -127,6 +129,7 @@ var Motorcycle = (function (_super) {
             { left: "-=300", top: "+=300" },
             { left: "+=300", top: "+=300" }
         ];
+        this.type = "motorcycle";
     }
     return Motorcycle;
 }(Vehicle));
@@ -147,6 +150,7 @@ var Tank = (function (_super) {
             { left: "-=300", top: "+=300" },
             { left: "+=300", top: "+=300" }
         ];
+        this.type = "tank";
     }
     return Tank;
 }(Vehicle));
@@ -155,7 +159,7 @@ var allSirens = [];
 var addCar = function () {
     allVehicles.push(new Car());
     allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].type = "car";
+    //allVehicles[allVehicles.length - 1].type = "car";
     allVehicles[allVehicles.length - 1].insert();
     $('#' + (allVehicles.length - 1)).click(function () {
         allVehicles[this.id].reverse();
@@ -164,7 +168,7 @@ var addCar = function () {
 var addCopCar = function () {
     allVehicles.push(new CopCar());
     allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].type = "copCar";
+    //allVehicles[allVehicles.length - 1].type = "copCar";
     allVehicles[allVehicles.length - 1].insert();
     $('#' + (allVehicles.length - 1)).click(function () {
         allVehicles[this.id].siren();
@@ -173,13 +177,13 @@ var addCopCar = function () {
 var addMotorcycle = function () {
     allVehicles.push(new Motorcycle());
     allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].type = "motorcycle";
+    //allVehicles[allVehicles.length - 1].type = "motorcycle";
     allVehicles[allVehicles.length - 1].insert();
 };
 var addTank = function () {
     allVehicles.push(new Tank());
     allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].type = "tank";
+    //allVehicles[allVehicles.length - 1].type = "tank";
     allVehicles[allVehicles.length - 1].insert();
 };
 function randomNum() {

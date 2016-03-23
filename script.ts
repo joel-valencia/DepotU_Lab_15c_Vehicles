@@ -65,6 +65,7 @@ class Car extends Vehicle {
         this.directions = ["W", "E"];
         this.degrees = [0, 180];
         this.animate = [{left: "-=400"}, {left: "+=400"}];
+        this.type = "car";
     }
     
     reverse() {
@@ -114,6 +115,7 @@ class CopCar extends Car {
         this.degrees = [90, -90];
         this.animate = [{top: "-=400"}, {top: "+=400"}];
         this.sirenOn = false;
+        this.type = "copCar";
     }
     
     siren() {
@@ -142,6 +144,7 @@ class Motorcycle extends Vehicle {
             {left: "-=300", top: "+=300"},
             {left: "+=300", top: "+=300"}
         ];
+        this.type = "motorcycle";
     }
 }
 
@@ -161,6 +164,7 @@ class Tank extends Vehicle {
             {left: "-=300", top: "+=300"},
             {left: "+=300", top: "+=300"}
         ];
+        this.type = "tank";
     }
     
     
@@ -175,7 +179,6 @@ var allSirens = [];
 var addCar = function() {
     allVehicles.push(new Car());
     allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].type = "car";
     allVehicles[allVehicles.length - 1].insert();
     $('#' + (allVehicles.length - 1)).click(function() {
        allVehicles[this.id].reverse();
@@ -185,7 +188,6 @@ var addCar = function() {
 var addCopCar = function() {
     allVehicles.push(new CopCar());
     allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].type = "copCar";
     allVehicles[allVehicles.length - 1].insert();
     $('#' + (allVehicles.length - 1)).click(function() {
        allVehicles[this.id].siren();
@@ -195,14 +197,12 @@ var addCopCar = function() {
 var addMotorcycle = function() {
     allVehicles.push(new Motorcycle());
     allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].type = "motorcycle";
     allVehicles[allVehicles.length - 1].insert();
 }
 
 var addTank = function() {
     allVehicles.push(new Tank());
     allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].type = "tank";
     allVehicles[allVehicles.length - 1].insert();
 }
 
