@@ -17,7 +17,7 @@ class Vehicle {
     constructor() {
         this.speed = 1;
         this.damagePts = 0;
-        this.baseAnimationDuration = 2000;
+        this.baseAnimationDuration = 4000;
     }
     
     insert() {
@@ -49,7 +49,11 @@ class Vehicle {
                     $('#'+this.id).stop();
                 }
             },
-            duration: duration
+            duration: duration,
+            easing: 'linear',
+            done: function() {
+                this.move();
+            }.bind(this)
         }
 
         $('#'+this.id).css("transform", `rotate(${this.currentDegrees}deg)`);
@@ -75,6 +79,8 @@ class Car extends Vehicle {
     }
     
     reverse() {
+        $('#'+this.id).stop();
+        
         var duration = this.baseAnimationDuration / this.speed;
         var options = {
             step: function() {
@@ -82,11 +88,18 @@ class Car extends Vehicle {
                     $('#'+this.id).stop();
                 }
             },
-            duration: duration
+            duration: duration,
+            easing: 'linear',
+            done: function() {
+                this.move();
+            }.bind(this)
         }
         if (this.currentDirection == "W") {
             $('#'+this.id).css('border-spacing', 0);
             this.currentDirection = "E";
+            this.currentDegrees = 180;
+            this.currentAnimate = {left: "+=400"};
+            
             $('#'+this.id).animate({  borderSpacing: 180 }, {
                 step: function(now,fx) {
                     $(this).css('transform','rotate('+now+'deg)');
@@ -99,6 +112,9 @@ class Car extends Vehicle {
         if (this.currentDirection == "E") {
             $('#'+this.id).css('border-spacing', 180);
             this.currentDirection = "W";
+            this.currentDegrees = 0;
+            this.currentAnimate = {left: "-=400"};
+            
             $('#'+this.id).animate({  borderSpacing: 360 }, {
                 step: function(now,fx) {
                     $(this).css('transform','rotate('+now+'deg)');
@@ -108,7 +124,6 @@ class Car extends Vehicle {
             $('#'+this.id).animate({left: "-=400"}, options);
             return;
         }
-
     }
 }
 
@@ -234,7 +249,7 @@ function blink(id, color) {
 }
 
 function detectCollisions(id) {
-    console.log("vehicle " + id + ", top " + $('#'+id).css("top") + ", left " + $('#'+id).css("left"));
+    //console.log("vehicle " + id + ", top " + $('#'+id).css("top") + ", left " + $('#'+id).css("left"));
     for (var i in allVehicles) {
         var myTop = parseInt($('#'+id).css("top"), 10);
         var myLeft = parseInt($('#'+id).css("left"), 10);
@@ -244,6 +259,7 @@ function detectCollisions(id) {
         var leftDiff = Math.abs(myLeft - otherLeft);
         var collisionThreshold = 75;
         if (i !== id && topDiff < collisionThreshold && leftDiff < collisionThreshold) {
+            // origin vehicle hit vehicle from loop
             console.log("collision! vehicle " + id + " hit vehicle " + i);
             var myOptions = {
                 done: function() {
@@ -262,6 +278,11 @@ function detectCollisions(id) {
             delete allVehicles[id];
             delete allVehicles[i];
             return true;
+        } else if (myTop >= document.documentElement.clientHeight - 100 || myLeft >= document.documentElement.clientWidth - 20 || myTop < -150 || myLeft < -150) {
+            // origin vehicle went outside container bounds
+            $('#'+id).remove();
+            clearInterval(allSirens[id]);
+            delete allVehicles[id];
         }
     }
 }
