@@ -99,31 +99,23 @@ class Car extends Vehicle {
             this.currentDirection = "E";
             this.currentDegrees = 180;
             this.currentAnimate = {left: "+=400"};
-            
-            $('#'+this.id).animate({  borderSpacing: 180 }, {
-                step: function(now,fx) {
-                    $(this).css('transform','rotate('+now+'deg)');
-                },
-                duration:'slow'
-            },'linear');
-            $('#'+this.id).animate({left: "+=400"}, options);
-            return;
-        }
-        if (this.currentDirection == "E") {
+            var targetDegrees = 180;
+        } else if (this.currentDirection == "E") {
             $('#'+this.id).css('border-spacing', 180);
             this.currentDirection = "W";
             this.currentDegrees = 0;
             this.currentAnimate = {left: "-=400"};
-            
-            $('#'+this.id).animate({  borderSpacing: 360 }, {
-                step: function(now,fx) {
-                    $(this).css('transform','rotate('+now+'deg)');
-                },
-                duration:'slow'
-            },'linear');
-            $('#'+this.id).animate({left: "-=400"}, options);
-            return;
+            var targetDegrees = 360;
         }
+        // crazy jquery animate workaround to allow animation of rotation
+        $('#'+this.id).animate({  borderSpacing: targetDegrees }, {
+            step: function(now,fx) {
+                $(this).css('transform','rotate('+now+'deg)');
+            },
+            duration:'slow'
+        },'linear');
+        $('#'+this.id).animate(this.currentAnimate, options);
+        return;
     }
 }
 
@@ -271,7 +263,7 @@ function detectCollisions(id) {
                     $('#'+id).remove();
                 }
             }
-            // for some reason stopping just one results in smoother hide animations
+            // only stopping the other vehicle because the origin vehicle's animation was stopped in the jquery animate code
             //$('#'+id).stop();
             $('#'+i).stop();
             $('#'+id).hide(myOptions);
