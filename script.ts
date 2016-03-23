@@ -20,6 +20,10 @@ Vehicle.prototype.insert = function() {
 Vehicle.prototype.move = function() {
     var newDirectionIndex = Math.floor(Math.random() * this.directions.length);
     var newDirection = this.directions[newDirectionIndex];
+    
+    var newDegrees = this.degrees[newDirectionIndex];
+    var newAnimate = this.animate[newDirectionIndex];
+    
     console.log("moving", this.type, newDirection);
     this.currentDirection = newDirection;
     var duration = 2000 / this.speed;
@@ -31,38 +35,44 @@ Vehicle.prototype.move = function() {
         },
         duration: duration
     }
-    if (newDirection == "N") {
-        $('#'+this.id).css("transform", "rotate(90deg)");
-        $('#'+this.id).animate({top: "-=400"}, options);
-    }
-    if (newDirection == "S") {
-        $('#'+this.id).css("transform", "rotate(-90deg)");
-        $('#'+this.id).animate({top: "+=400"}, options);
-    }
-    if (newDirection == "W") {
-        $('#'+this.id).css("transform", "rotate(0)");
-        $('#'+this.id).animate({left: "-=400"}, options);
-    }
-    if (newDirection == "E") {
-        $('#'+this.id).css("transform", "rotate(180deg)");
-        $('#'+this.id).animate({left: "+=400"}, options);
-    }
-    if (newDirection == "NW") {
-        $('#'+this.id).css("transform", "rotate(45deg)");
-        $('#'+this.id).animate({left: "-=300", top: "-=300"}, options);
-    }
-    if (newDirection == "NE") {
-        $('#'+this.id).css("transform", "rotate(135deg)");
-        $('#'+this.id).animate({left: "+=300", top: "-=300"}, options);
-    }
-    if (newDirection == "SW") {
-        $('#'+this.id).css("transform", "rotate(-45deg)");
-        $('#'+this.id).animate({left: "-=300", top: "+=300"}, options);
-    }
-    if (newDirection == "SE") {
-        $('#'+this.id).css("transform", "rotate(-135deg)");
-        $('#'+this.id).animate({left: "+=300", top: "+=300"}, options);
-    }
+    
+    
+
+    $('#'+this.id).css("transform", `rotate(${newDegrees}deg)`);
+    $('#'+this.id).animate(newAnimate, options);
+    
+    // if (newDirection == "N") {
+    //     $('#'+this.id).css("transform", "rotate(90deg)");
+    //     $('#'+this.id).animate({top: "-=400"}, options);
+    // }
+    // if (newDirection == "S") {
+    //     $('#'+this.id).css("transform", "rotate(-90deg)");
+    //     $('#'+this.id).animate({top: "+=400"}, options);
+    // }
+    // if (newDirection == "W") {
+    //     $('#'+this.id).css("transform", "rotate(0)");
+    //     $('#'+this.id).animate({left: "-=400"}, options);
+    // }
+    // if (newDirection == "E") {
+    //     $('#'+this.id).css("transform", "rotate(180deg)");
+    //     $('#'+this.id).animate({left: "+=400"}, options);
+    // }
+    // if (newDirection == "NW") {
+    //     $('#'+this.id).css("transform", "rotate(45deg)");
+    //     $('#'+this.id).animate({left: "-=300", top: "-=300"}, options);
+    // }
+    // if (newDirection == "NE") {
+    //     $('#'+this.id).css("transform", "rotate(135deg)");
+    //     $('#'+this.id).animate({left: "+=300", top: "-=300"}, options);
+    // }
+    // if (newDirection == "SW") {
+    //     $('#'+this.id).css("transform", "rotate(-45deg)");
+    //     $('#'+this.id).animate({left: "-=300", top: "+=300"}, options);
+    // }
+    // if (newDirection == "SE") {
+    //     $('#'+this.id).css("transform", "rotate(-135deg)");
+    //     $('#'+this.id).animate({left: "+=300", top: "+=300"}, options);
+    // }
 }
 
 Vehicle.prototype.damage = function() {
@@ -77,6 +87,8 @@ Vehicle.prototype.totaled = function() {
 var Car = function() {
     Vehicle.call(this);
     this.directions = ["W", "E"];
+    this.degrees = [0, 180];
+    this.animate = [{left: "-=400"}, {left: "+=400"}];
 }
 Car.prototype = Object.create(Vehicle.prototype);
 Car.prototype.constructor = Car;
@@ -119,6 +131,8 @@ Car.prototype.reverse = function() {
 var CopCar = function() {
     Car.call(this);
     this.directions = ["N", "S"];
+    this.degrees = [90, -90];
+    this.animate = [{top: "-=400"}, {top: "+=400"}]
     this.sirenOn = false;
 }
 CopCar.prototype = Object.create(Car.prototype);
@@ -140,6 +154,13 @@ var Motorcycle = function() {
     Vehicle.call(this);
     this.speed = 2;
     this.directions = ["NW", "NE", "SW", "SE"];
+    this.degrees = [45, 135, -45, -135];
+    this.animate = [
+        {left: "-=300", top: "-=300"},
+        {left: "+=300", top: "-=300"},
+        {left: "-=300", top: "+=300"},
+        {left: "+=300", top: "+=300"}
+    ]
 }
 Motorcycle.prototype = Object.create(Vehicle.prototype);
 Motorcycle.prototype.constructor = Motorcycle;
@@ -148,6 +169,17 @@ var Tank = function() {
     Vehicle.call(this);
     this.speed = 0.5;
     this.directions = ["N", "S", "W", "E", "NW", "NE", "SW", "SE"]
+    this.degrees = [90, -90, 0, 180, 45, 135, -45, -135];
+    this.animate = [
+        {top: "-=400"},
+        {top: "+=400"},
+        {left: "-=400"},
+        {left: "+=400"},
+        {left: "-=300", top: "-=300"},
+        {left: "+=300", top: "-=300"},
+        {left: "-=300", top: "+=300"},
+        {left: "+=300", top: "+=300"}
+    ]
 }
 Tank.prototype = Object.create(Vehicle.prototype);
 Tank.prototype.constructor = Tank;
