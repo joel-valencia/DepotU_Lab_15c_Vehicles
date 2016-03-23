@@ -207,6 +207,9 @@ var addMotorcycle = function() {
     allVehicles.push(new Motorcycle());
     allVehicles[lastIndex].id = lastIndex;
     allVehicles[lastIndex].insert();
+    $('#' + lastIndex).click(function() {
+       allVehicles[this.id].move();
+    });
 }
 
 var addTank = function() {
@@ -214,6 +217,9 @@ var addTank = function() {
     var lastIndex = allVehicles.length - 1;
     allVehicles[allVehicles.length - 1].id = lastIndex;
     allVehicles[allVehicles.length - 1].insert();
+    $('#' + lastIndex).click(function() {
+       allVehicles[this.id].move();
+    });
 }
 
 function randomNum() {
