@@ -249,7 +249,7 @@ function detectCollisions(id) {
             delete allVehicles[i];
             return true;
         }
-        else if (myTop >= document.documentElement.clientHeight - 100 || myLeft >= document.documentElement.clientWidth - 20 || myTop < -150 || myLeft < -150) {
+        else if (myTop >= document.documentElement.clientHeight || myLeft >= document.documentElement.clientWidth || myTop < -150 || myLeft < -150) {
             // origin vehicle went outside container bounds
             $('#' + id).remove();
             clearInterval(allSirens[id]);
