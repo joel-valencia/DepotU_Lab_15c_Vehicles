@@ -18,15 +18,15 @@ var Vehicle = (function () {
         $('#' + this.id).css("top", top);
         this.color = 'rgb(' + randomNum() + ',' + randomNum() + ',' + randomNum() + ')';
         $('#' + this.id).css("background-color", this.color);
+        var newDirectionIndex = Math.floor(Math.random() * this.directions.length);
+        var newDirection = this.directions[newDirectionIndex];
+        this.currentDirection = newDirection;
+        this.currentDegrees = this.degrees[newDirectionIndex];
+        this.currentAnimate = this.animate[newDirectionIndex];
         this.move();
     };
     Vehicle.prototype.move = function () {
-        var newDirectionIndex = Math.floor(Math.random() * this.directions.length);
-        var newDirection = this.directions[newDirectionIndex];
-        var newDegrees = this.degrees[newDirectionIndex];
-        var newAnimate = this.animate[newDirectionIndex];
-        console.log("moving", this.type, newDirection);
-        this.currentDirection = newDirection;
+        console.log("moving", this.type, this.currentDirection);
         var duration = 2000 / this.speed;
         var options = {
             step: function () {
@@ -36,8 +36,8 @@ var Vehicle = (function () {
             },
             duration: duration
         };
-        $('#' + this.id).css("transform", "rotate(" + newDegrees + "deg)");
-        $('#' + this.id).animate(newAnimate, options);
+        $('#' + this.id).css("transform", "rotate(" + this.currentDegrees + "deg)");
+        $('#' + this.id).animate(this.currentAnimate, options);
     };
     Vehicle.prototype.damage = function () {
     };
