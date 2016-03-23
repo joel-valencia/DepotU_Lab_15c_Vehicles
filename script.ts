@@ -178,31 +178,35 @@ var allSirens = [];
 
 var addCar = function() {
     allVehicles.push(new Car());
-    allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].insert();
-    $('#' + (allVehicles.length - 1)).click(function() {
+    var lastIndex = allVehicles.length - 1;
+    allVehicles[lastIndex].id = lastIndex;
+    allVehicles[lastIndex].insert();
+    $('#' + lastIndex).click(function() {
        allVehicles[this.id].reverse();
     });
 }
 
 var addCopCar = function() {
     allVehicles.push(new CopCar());
-    allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].insert();
-    $('#' + (allVehicles.length - 1)).click(function() {
+    var lastIndex = allVehicles.length - 1;
+    allVehicles[lastIndex].id = lastIndex;
+    allVehicles[lastIndex].insert();
+    $('#' + lastIndex).click(function() {
        allVehicles[this.id].siren();
     });
 }
 
 var addMotorcycle = function() {
+    var lastIndex = allVehicles.length - 1;
     allVehicles.push(new Motorcycle());
-    allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
-    allVehicles[allVehicles.length - 1].insert();
+    allVehicles[lastIndex].id = lastIndex;
+    allVehicles[lastIndex].insert();
 }
 
 var addTank = function() {
     allVehicles.push(new Tank());
-    allVehicles[allVehicles.length - 1].id = allVehicles.length - 1;
+    var lastIndex = allVehicles.length - 1;
+    allVehicles[allVehicles.length - 1].id = lastIndex;
     allVehicles[allVehicles.length - 1].insert();
 }
 
