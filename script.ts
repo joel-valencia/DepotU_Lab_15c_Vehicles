@@ -17,7 +17,7 @@ class Vehicle {
     constructor() {
         this.speed = 1;
         this.damagePts = 0;
-        this.baseAnimationDuration = 4000;
+        this.baseAnimationDuration = 5000;
     }
     
     insert() {
@@ -271,6 +271,9 @@ function detectCollisions(id) {
                     $('#'+id).remove();
                 }
             }
+            // for some reason stopping just one results in smoother hide animations
+            //$('#'+id).stop();
+            $('#'+i).stop();
             $('#'+id).hide(myOptions);
             $('#'+i).hide(otherOptions);
             clearInterval(allSirens[id]);
