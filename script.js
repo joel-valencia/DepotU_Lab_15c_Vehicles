@@ -184,8 +184,8 @@ var addCopCar = function () {
     });
 };
 var addMotorcycle = function () {
-    var lastIndex = allVehicles.length - 1;
     allVehicles.push(new Motorcycle());
+    var lastIndex = allVehicles.length - 1;
     allVehicles[lastIndex].id = lastIndex;
     allVehicles[lastIndex].insert();
     $('#' + lastIndex).click(function () {
