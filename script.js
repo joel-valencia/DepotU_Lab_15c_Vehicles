@@ -8,6 +8,7 @@ var Vehicle = (function () {
     function Vehicle() {
         this.speed = 1;
         this.damagePts = 0;
+        this.baseAnimationDuration = 2000;
     }
     Vehicle.prototype.insert = function () {
         var newVehicle = $('<div class= "vehicle ' + this.type + '" id=' + this.id + '></div>');
@@ -27,7 +28,7 @@ var Vehicle = (function () {
     };
     Vehicle.prototype.move = function () {
         console.log("moving", this.type, this.currentDirection);
-        var duration = 2000 / this.speed;
+        var duration = this.baseAnimationDuration / this.speed;
         var options = {
             step: function () {
                 if (detectCollisions(this.id)) {
@@ -56,7 +57,7 @@ var Car = (function (_super) {
         this.type = "car";
     }
     Car.prototype.reverse = function () {
-        var duration = 2000 / this.speed;
+        var duration = this.baseAnimationDuration / this.speed;
         var options = {
             step: function () {
                 if (detectCollisions(this.id)) {

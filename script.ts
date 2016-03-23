@@ -12,10 +12,12 @@ class Vehicle {
     currentDirection: string;
     currentDegrees: number;
     currentAnimate: Object;
+    baseAnimationDuration: number;
     
     constructor() {
         this.speed = 1;
         this.damagePts = 0;
+        this.baseAnimationDuration = 2000;
     }
     
     insert() {
@@ -40,7 +42,7 @@ class Vehicle {
     move() {
         console.log("moving", this.type, this.currentDirection);
         
-        var duration = 2000 / this.speed;
+        var duration = this.baseAnimationDuration / this.speed;
         var options = {
             step: function() {
                 if (detectCollisions(this.id)) {
@@ -73,7 +75,7 @@ class Car extends Vehicle {
     }
     
     reverse() {
-        var duration = 2000 / this.speed;
+        var duration = this.baseAnimationDuration / this.speed;
         var options = {
             step: function() {
                 if (detectCollisions(this.id)) {
