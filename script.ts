@@ -108,14 +108,16 @@ class Car extends Vehicle {
             var targetDegrees = 360;
         }
         // crazy jquery animate workaround to allow animation of rotation
-        $('#'+this.id).animate({  borderSpacing: targetDegrees }, {
+        var optionsRotate = {
             step: function(now,fx) {
                 $(this).css('transform','rotate('+now+'deg)');
             },
-            duration:'slow'
-        },'linear');
-        $('#'+this.id).animate(this.currentAnimate, options);
-        return;
+            duration:'slow',
+            done: function() {
+                this.move();
+            }.bind(this)
+        }
+        $('#'+this.id).animate({  borderSpacing: targetDegrees }, optionsRotate);
     }
 }
 
