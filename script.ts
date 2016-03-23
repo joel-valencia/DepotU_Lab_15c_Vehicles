@@ -260,7 +260,7 @@ function detectCollisions(id) {
             }
             var otherOptions = {
                 done: function() {
-                    $('#'+id).remove();
+                    $('#'+i).remove();
                 }
             }
             // only stopping the other vehicle because the origin vehicle's animation was stopped in the jquery animate code
@@ -275,6 +275,7 @@ function detectCollisions(id) {
             return true;
         } else if (myTop >= document.documentElement.clientHeight || myLeft >= document.documentElement.clientWidth || myTop < -150 || myLeft < -150) {
             // origin vehicle went outside container bounds
+            $('#'+id).stop;
             $('#'+id).remove();
             clearInterval(allSirens[id]);
             delete allVehicles[id];
