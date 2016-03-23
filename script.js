@@ -32,38 +32,6 @@ Vehicle.prototype.move = function () {
     };
     $('#' + this.id).css("transform", "rotate(" + newDegrees + "deg)");
     $('#' + this.id).animate(newAnimate, options);
-    // if (newDirection == "N") {
-    //     $('#'+this.id).css("transform", "rotate(90deg)");
-    //     $('#'+this.id).animate({top: "-=400"}, options);
-    // }
-    // if (newDirection == "S") {
-    //     $('#'+this.id).css("transform", "rotate(-90deg)");
-    //     $('#'+this.id).animate({top: "+=400"}, options);
-    // }
-    // if (newDirection == "W") {
-    //     $('#'+this.id).css("transform", "rotate(0)");
-    //     $('#'+this.id).animate({left: "-=400"}, options);
-    // }
-    // if (newDirection == "E") {
-    //     $('#'+this.id).css("transform", "rotate(180deg)");
-    //     $('#'+this.id).animate({left: "+=400"}, options);
-    // }
-    // if (newDirection == "NW") {
-    //     $('#'+this.id).css("transform", "rotate(45deg)");
-    //     $('#'+this.id).animate({left: "-=300", top: "-=300"}, options);
-    // }
-    // if (newDirection == "NE") {
-    //     $('#'+this.id).css("transform", "rotate(135deg)");
-    //     $('#'+this.id).animate({left: "+=300", top: "-=300"}, options);
-    // }
-    // if (newDirection == "SW") {
-    //     $('#'+this.id).css("transform", "rotate(-45deg)");
-    //     $('#'+this.id).animate({left: "-=300", top: "+=300"}, options);
-    // }
-    // if (newDirection == "SE") {
-    //     $('#'+this.id).css("transform", "rotate(-135deg)");
-    //     $('#'+this.id).animate({left: "+=300", top: "+=300"}, options);
-    // }
 };
 Vehicle.prototype.damage = function () {
 };
@@ -251,10 +219,12 @@ $(document).ready(function () {
     $('#btnTank').click(function () {
         addTank();
     });
-    $('body').click(function () {
-        console.log('------------------');
-        for (var i in allVehicles) {
-            console.log("vehicle " + i + ", top " + $('#' + i).css("top") + ", left " + $('#' + i).css("left"));
-        }
-    });
+    $('.container').css("width", document.documentElement.clientWidth - 20);
+    $('.container').css("height", document.documentElement.clientHeight - 100);
+    // $('body').click(function() {
+    //     console.log('------------------');
+    //     for (var i in allVehicles) {
+    //         console.log("vehicle " + i + ", top " + $('#'+i).css("top") + ", left " + $('#'+i).css("left"));
+    //     }
+    // });
 });
