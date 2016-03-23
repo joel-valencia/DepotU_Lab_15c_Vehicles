@@ -13,8 +13,8 @@ var Vehicle = (function () {
     Vehicle.prototype.insert = function () {
         var newVehicle = $("<div class= \"vehicle " + this.type + "\" id=\"" + this.id + "\"></div>");
         $('.container').append(newVehicle);
-        var left = Math.floor(Math.random() * document.documentElement.clientWidth);
-        var top = Math.floor(Math.random() * document.documentElement.clientHeight);
+        var left = Math.floor(Math.random() * (document.documentElement.clientWidth - 100));
+        var top = Math.floor(Math.random() * (document.documentElement.clientHeight - 100));
         $('#' + this.id).css("left", left);
         $('#' + this.id).css("top", top);
         this.color = "rgb(" + randomNum() + "," + randomNum() + "," + randomNum();
@@ -241,26 +241,25 @@ function detectCollisions(id) {
             return true;
         }
         else if (myTop >= document.documentElement.clientHeight) {
-            // origin vehicle went outside container bounds
-            // $('#'+id).stop;
-            // $('#'+id).remove();
-            // clearInterval(allSirens[id]);
-            // delete allVehicles[id];
+            // went off bottom edge
             $('#' + id).stop(true);
             $('#' + id).css('top', -80);
             allVehicles[id].move();
         }
         else if (myLeft >= document.documentElement.clientWidth) {
+            // went off right edge
             $('#' + id).stop(true);
             $('#' + id).css('left', -100);
             allVehicles[id].move();
         }
         else if (myTop <= -110) {
+            // went off top edge
             $('#' + id).stop(true);
             $('#' + id).css('top', document.documentElement.clientHeight - 80);
             allVehicles[id].move();
         }
         else if (myLeft <= -110) {
+            // went off left edge
             $('#' + id).stop(true);
             $('#' + id).css('left', document.documentElement.clientWidth - 30);
             allVehicles[id].move();

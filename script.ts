@@ -23,8 +23,8 @@ class Vehicle {
     insert() {
         var newVehicle = $(`<div class= "vehicle ${this.type}" id="${this.id}"></div>`);
         $('.container').append(newVehicle);
-        var left = Math.floor(Math.random() * document.documentElement.clientWidth);
-        var top = Math.floor(Math.random() * document.documentElement.clientHeight);
+        var left = Math.floor(Math.random() * (document.documentElement.clientWidth - 100));
+        var top = Math.floor(Math.random() * (document.documentElement.clientHeight - 100));
         $('#'+this.id).css("left", left);
         $('#'+this.id).css("top", top);
         this.color = `rgb(${randomNum()},${randomNum()},${randomNum()}`;
