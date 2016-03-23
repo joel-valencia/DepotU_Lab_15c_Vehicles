@@ -240,12 +240,30 @@ function detectCollisions(id) {
             delete allVehicles[i];
             return true;
         }
-        else if (myTop >= document.documentElement.clientHeight || myLeft >= document.documentElement.clientWidth || myTop < -150 || myLeft < -150) {
+        else if (myTop >= document.documentElement.clientHeight) {
             // origin vehicle went outside container bounds
-            $('#' + id).stop;
-            $('#' + id).remove();
-            clearInterval(allSirens[id]);
-            delete allVehicles[id];
+            // $('#'+id).stop;
+            // $('#'+id).remove();
+            // clearInterval(allSirens[id]);
+            // delete allVehicles[id];
+            $('#' + id).stop(true);
+            $('#' + id).css('top', -80);
+            allVehicles[id].move();
+        }
+        else if (myLeft >= document.documentElement.clientWidth) {
+            $('#' + id).stop(true);
+            $('#' + id).css('left', -100);
+            allVehicles[id].move();
+        }
+        else if (myTop <= -110) {
+            $('#' + id).stop(true);
+            $('#' + id).css('top', document.documentElement.clientHeight - 80);
+            allVehicles[id].move();
+        }
+        else if (myLeft <= -110) {
+            $('#' + id).stop(true);
+            $('#' + id).css('left', document.documentElement.clientWidth - 30);
+            allVehicles[id].move();
         }
     }
 }
