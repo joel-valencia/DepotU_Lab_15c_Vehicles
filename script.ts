@@ -21,13 +21,13 @@ class Vehicle {
     }
     
     insert() {
-        var newVehicle = $('<div class= "vehicle ' + this.type + '" id=' + this.id + '></div>');
+        var newVehicle = $(`<div class= "vehicle ${this.type}" id="${this.id}"></div>`);
         $('.container').append(newVehicle);
         var left = Math.floor(Math.random() * document.documentElement.clientWidth);
         var top = Math.floor(Math.random() * document.documentElement.clientHeight);
         $('#'+this.id).css("left", left);
         $('#'+this.id).css("top", top);
-        this.color = 'rgb(' + randomNum() + ',' + randomNum() + ',' + randomNum() + ')';
+        this.color = `rgb(${randomNum()},${randomNum()},${randomNum()}`;
         $('#'+this.id).css("background-color", this.color);
         
         var newDirectionIndex = Math.floor(Math.random() * this.directions.length);
@@ -246,7 +246,7 @@ function detectCollisions(id) {
         var collisionThreshold = 75;
         if (i !== id && topDiff < collisionThreshold && leftDiff < collisionThreshold) {
             // origin vehicle hit vehicle from loop
-            console.log("collision! vehicle " + id + " hit vehicle " + i);
+            console.log(`collision! vehicle ${id} hit vehicle ${i}`);
             var myOptions = {
                 done: function() {
                     $('#'+id).remove();

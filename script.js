@@ -11,13 +11,13 @@ var Vehicle = (function () {
         this.baseAnimationDuration = 5000;
     }
     Vehicle.prototype.insert = function () {
-        var newVehicle = $('<div class= "vehicle ' + this.type + '" id=' + this.id + '></div>');
+        var newVehicle = $("<div class= \"vehicle " + this.type + "\" id=\"" + this.id + "\"></div>");
         $('.container').append(newVehicle);
         var left = Math.floor(Math.random() * document.documentElement.clientWidth);
         var top = Math.floor(Math.random() * document.documentElement.clientHeight);
         $('#' + this.id).css("left", left);
         $('#' + this.id).css("top", top);
-        this.color = 'rgb(' + randomNum() + ',' + randomNum() + ',' + randomNum() + ')';
+        this.color = "rgb(" + randomNum() + "," + randomNum() + "," + randomNum();
         $('#' + this.id).css("background-color", this.color);
         var newDirectionIndex = Math.floor(Math.random() * this.directions.length);
         var newDirection = this.directions[newDirectionIndex];
