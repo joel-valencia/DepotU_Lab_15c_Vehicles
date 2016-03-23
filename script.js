@@ -114,7 +114,7 @@ var CopCar = (function (_super) {
     CopCar.prototype.siren = function () {
         if (this.sirenOn == false) {
             this.sirenOn = true;
-            allSirens[this.id] = setInterval('blink(' + this.id + ', "' + this.color + '")', 500);
+            allSirens[this.id] = setInterval("blink(" + this.id + ", \"" + this.color + "\")", 500);
             return;
         }
         if (this.sirenOn == true) {

@@ -134,7 +134,7 @@ class CopCar extends Car {
     siren() {
         if (this.sirenOn == false) {
             this.sirenOn = true;
-            allSirens[this.id] = setInterval('blink('+this.id+', "'+this.color+'")', 500);
+            allSirens[this.id] = setInterval(`blink(${this.id}, "${this.color}")`, 500);
             return;  
         }
         if (this.sirenOn == true) {
